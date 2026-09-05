@@ -153,11 +153,15 @@ export async function fetchTimersFromCloud(): Promise<{
   data?: TimerItem[];
   error?: string;
 }> {
-  try {
-    const { data, error } = await supabase
-      .from('timers_alarms')
-      .select('*')
-      .order('created_at', { ascending: false });
+try {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { success: true, data: [] };
+
+  const { data, error } = await supabase
+    .from('timers_alarms')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
 
     if (error) {
       console.error('[Supabase] fetchTimers query error:', error);
@@ -250,11 +254,15 @@ export async function upsertTimerToCloud(item: TimerItem): Promise<{
   success: boolean;
   error?: string;
 }> {
-  try {
-    const row = timerItemToDbRow(item);
-    const { error } = await supabase
-      .from('timers_alarms')
-      .upsert(row, { onConflict: 'id' });
+try {
+  const { data: { user } } = await supabase.auth.getUser();
+  const row = timerItemToDbRow(item);
+  if (user) {
+    row.user_id = user.id;
+  }
+  const { error } = await supabase
+    .from('timers_alarms')
+    .upsert(row, { onConflict: 'id' });
 
     if (error) {
       console.error('[Supabase] upsertTimer error:', error);
