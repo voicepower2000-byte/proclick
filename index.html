@@ -1,21 +1,26 @@
-<!doctype html>
-<html lang="en" dir="ltr" class="dark">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pro Click</title>
-    <meta name="description" content="Pro Click (بروكليك) - Precision multi-timer and alarm web application with custom layout density, per-item sound profiles, and circular countdowns." />
-    <meta property="og:title" content="Pro Click" />
-    <meta property="og:description" content="Pro Click (بروكليك) - Precision multi-timer and alarm web application with custom layout density, per-item sound profiles, and circular countdowns." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Pro Click - Timers & Alarms</title>
+    
+    <!-- ربط ملف الـ PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#000000" />
   </head>
-  <body class="bg-[#09090b] text-zinc-100 min-h-screen antialiased selection:bg-zinc-800 selection:text-white">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- تسجيل Service Worker للعمل بدون إنترنت والتثبيت -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
   </body>
 </html>
-
