@@ -85,68 +85,7 @@ const SOUND_KEY = 'proclick_sound_tone_v2';
 const MOBILE_COLS_KEY = 'proclick_mobile_cols_v2';
 const DESKTOP_COLS_KEY = 'proclick_desktop_cols_v2';
 
-const INITIAL_ITEMS: TimerItem[] = [
-  {
-    id: '00000000-0000-4000-8000-000000000001',
-    type: 'timer',
-    title: 'Focus Sprint',
-    icon: '⚡',
-    iconType: 'emoji',
-    color: '#ff3366', // Neon Red
-    status: 'paused',
-    totalSeconds: 25 * 60,
-    remainingSeconds: 25 * 60,
-    createdAt: Date.now() - 30000,
-    soundTone: 'classic-chime',
-    ringingDuration: 0,
-  },
-  {
-    id: '00000000-0000-4000-8000-000000000002',
-    type: 'timer',
-    title: 'Green Tea Brew',
-    icon: 'TEA',
-    iconType: 'text',
-    color: '#10b981', // Emerald Green
-    status: 'active',
-    totalSeconds: 4 * 60,
-    remainingSeconds: 3 * 60 + 20,
-    endTimestamp: Date.now() + (3 * 60 + 20) * 1000,
-    createdAt: Date.now() - 60000,
-    soundTone: 'zen-gong',
-    ringingDuration: 0,
-  },
-  {
-    id: '00000000-0000-4000-8000-000000000003',
-    type: 'timer',
-    title: 'Core Plank Workout',
-    icon: 'dumbbell',
-    iconType: 'lucide',
-    color: '#3b82f6', // Electric Blue
-    status: 'paused',
-    totalSeconds: 90,
-    remainingSeconds: 90,
-    createdAt: Date.now() - 20000,
-    soundTone: 'energetic-pulse',
-    ringingDuration: 0,
-  },
-  {
-    id: '00000000-0000-4000-8000-000000000004',
-    type: 'alarm',
-    title: 'Daily Standup Sync',
-    icon: 'target',
-    iconType: 'lucide',
-    color: '#a855f7', // Vibrant Purple
-    status: 'active',
-    totalSeconds: 24 * 3600,
-    remainingSeconds: 0,
-    targetTime: '15:00',
-    targetTimestamp: getNextAlarmTimestamp('15:00').targetTimestamp,
-    repeatDaily: true,
-    createdAt: Date.now() - 10000,
-    soundTone: 'digital-beep',
-    ringingDuration: 0,
-  },
-];
+const INITIAL_ITEMS: TimerItem[] = [];
 
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
 
