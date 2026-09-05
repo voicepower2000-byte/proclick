@@ -79,7 +79,7 @@ interface TimerContextType {
   testAudio: (tone?: SoundTone) => void;
 }
 
-const STORAGE_KEY = 'proclick_timers_v3';
+const STORAGE_KEY = 'proclick_timers_v4';
 const LANG_KEY = 'proclick_lang_v2';
 const SOUND_KEY = 'proclick_sound_tone_v2';
 const MOBILE_COLS_KEY = 'proclick_mobile_cols_v2';
