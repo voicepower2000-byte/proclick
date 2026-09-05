@@ -1,40 +1,25 @@
-const CACHE_NAME = 'proclick-v4';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://cdn-icons-png.flaticon.com/512/3602/3602145.png'
-];
+const CACHE_NAME = 'proclick-v5';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) return caches.delete(key);
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request).then((networkResponse) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
-        });
-      });
-    }).catch(() => caches.match('/index.html'))
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
