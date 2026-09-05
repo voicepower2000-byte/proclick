@@ -1,0 +1,6 @@
+{
+  "name": "Pro Click",
+  "description": "Pro Click (بروكليك) - Precision multi-timer and alarm web application with custom layout density, per-item sound profiles, and circular countdowns.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
